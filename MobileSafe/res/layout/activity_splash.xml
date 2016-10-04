@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dp"
         android:textSize="16sp"
         android:textColor="#888"
         android:text="版本号：1.0.1" />

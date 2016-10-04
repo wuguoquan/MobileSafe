@@ -200,7 +200,7 @@ public class SplashActivity extends Activity {
 					}
 				}
 			}
-		}.start();
+		}.start(); 
 			
 	}
 
@@ -209,6 +209,7 @@ public class SplashActivity extends Activity {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("最新版本 : " + mVersionName);
 		builder.setMessage(mDesc);
+		//builder.setCancelable(false); // 不让用户点返回键，用户体验太差，尽量不用
 		builder.setPositiveButton("立即更新", new OnClickListener() {
 			
 			@Override
