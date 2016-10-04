@@ -24,9 +24,9 @@
             </intent-filter>
         </activity>
         
-        <activity
-            android:name="com.wugq.mobilesafe.activity.HomeActivity">           
-        </activity>
+        <activity android:name="com.wugq.mobilesafe.activity.HomeActivity"/>
+        <activity android:name="com.wugq.mobilesafe.activity.SettingActivity"/>
+        
         
     </application>
 
