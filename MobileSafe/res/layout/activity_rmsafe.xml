@@ -51,6 +51,42 @@
             
         </RelativeLayout>
     
+        <RelativeLayout 
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:padding="5dp">
+            
+            <TextView 
+                android:id="@+id/tv_contact_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="绑定联系人"
+                android:textSize="22sp"/>
+            
+            <TextView 
+                android:id="@+id/tv_contact_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_contact_title"
+                android:text="联系人未绑定"
+                android:layout_marginTop="3dp"
+                android:textSize="18sp"
+                android:textColor="#a999"/>
+            
+            <CheckBox 
+                android:id="@+id/cb_contact_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"/>
+            
+            <View 
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:background="#FFF"
+                android:layout_alignParentBottom="true"/>
+            
+        </RelativeLayout>
     
     
 
