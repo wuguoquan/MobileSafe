@@ -45,6 +45,11 @@ public class HomeActivity extends Activity {
 					// 设置中心页面
 					startActivity(new Intent(HomeActivity.this, SettingActivity.class));
 					break;
+					
+				case 0:
+					// 手机防盗页面
+					startActivity(new Intent(HomeActivity.this, RmSafeActivity.class));
+					break;
 
 				default:
 					break;
