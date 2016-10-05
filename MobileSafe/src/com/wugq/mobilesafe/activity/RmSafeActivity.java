@@ -3,10 +3,13 @@ package com.wugq.mobilesafe.activity;
 import com.wugq.mobilesafe.R;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -100,6 +103,17 @@ public class RmSafeActivity extends Activity {
 					// 显示联系人信息
 					tvContactDesc.setText("联系人已绑定" + "(" + mPref.getString("contactName", null) +
 							":" + mPref.getString("contactPhone", null) +")");
+					// 发送短信给联系人
+					SmsManager smsManager = SmsManager.getDefault();
+					smsManager.sendTextMessage(mPref.getString("contactPhone", null), null, 
+							"已绑定联系人", null, null);
+					
+					// 播放报警音乐
+				    MediaPlayer player = MediaPlayer.create(RmSafeActivity.this, R.raw.ylzs);
+				    player.setVolume(1f, 1f);
+				    player.setLooping(true);
+				    player.start();
+				    
 					
 				}else {
 					tvContactDesc.setText("联系人未绑定");
@@ -110,7 +124,7 @@ public class RmSafeActivity extends Activity {
 					mPref.edit().remove("contactPhone").commit();
 				}				
 			}
-		});
+		});  
 		
 	}
 	
