@@ -88,6 +88,41 @@
             
         </RelativeLayout>
     
-    
+     <RelativeLayout 
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:padding="5dp">
+            
+            <TextView 
+                android:id="@+id/tv_gps_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="绑定GPS"
+                android:textSize="22sp"/>
+            
+            <TextView 
+                android:id="@+id/tv_gps_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_gps_title"
+                android:text="GPS未绑定"
+                android:layout_marginTop="3dp"
+                android:textSize="18sp"
+                android:textColor="#a999"/>
+            
+            <CheckBox 
+                android:id="@+id/cb_gps_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"/>
+            
+            <View 
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:background="#FFF"
+                android:layout_alignParentBottom="true"/>
+            
+        </RelativeLayout>    
 
 </LinearLayout>

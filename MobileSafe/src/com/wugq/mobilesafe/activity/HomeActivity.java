@@ -19,7 +19,7 @@ public class HomeActivity extends Activity {
 
 	private GridView gvHome;
 	
-	private String[] mItems = new String[]{"手机防盗","通讯卫士","软件管理","进程管理",
+	private String[] mItems = new String[]{"手机防盗","照相处理","软件管理","进程管理",
 			"流量管理","手机杀毒","缓存清理","高级工具","设置中心"};
 	private int[] mPics = new int[]{R.drawable.home_safe, R.drawable.home_callmsgsafe, 
 			R.drawable.home_apps, R.drawable.home_taskmanager, R.drawable.home_netmanager, 
@@ -49,6 +49,11 @@ public class HomeActivity extends Activity {
 				case 0:
 					// 手机防盗页面
 					startActivity(new Intent(HomeActivity.this, RmSafeActivity.class));
+					break;
+					
+				case 1:
+					// 照相处理页面
+					startActivity(new Intent(HomeActivity.this, CameraActivity.class));
 					break;
 
 				default:

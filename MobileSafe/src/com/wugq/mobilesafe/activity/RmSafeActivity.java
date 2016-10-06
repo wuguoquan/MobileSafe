@@ -1,11 +1,18 @@
 package com.wugq.mobilesafe.activity;
 
+import java.util.List;
+
 import com.wugq.mobilesafe.R;
+import com.wugq.mobilesafe.service.LocationService;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,6 +29,8 @@ public class RmSafeActivity extends Activity {
 	private TextView tvSimDesc;
 	private CheckBox cbContactStatus;
 	private TextView tvContactDesc;
+	private CheckBox cbGpsStatus;
+	private TextView tvGpsDesc;
 	
 	
 	@Override
@@ -41,6 +50,8 @@ public class RmSafeActivity extends Activity {
 		tvSimDesc = (TextView) findViewById(R.id.tv_sim_desc);
 		cbContactStatus = (CheckBox) findViewById(R.id.cb_contact_status);
 		tvContactDesc = (TextView) findViewById(R.id.tv_contact_desc);
+		cbGpsStatus = (CheckBox) findViewById(R.id.cb_gps_status);
+		tvGpsDesc = (TextView) findViewById(R.id.tv_gps_desc);
 
 		
 				
@@ -59,6 +70,14 @@ public class RmSafeActivity extends Activity {
 		}else {
 			tvContactDesc.setText("联系人未绑定");
 			cbContactStatus.setChecked(false);
+		}
+		
+		if (mPref.getString("IsUseGps", "false").equals("true")) {
+			tvGpsDesc.setText("GPS已绑定");
+			cbGpsStatus.setChecked(true);			
+		}else {
+			tvGpsDesc.setText("GPS未绑定");
+			cbGpsStatus.setChecked(false);	
 		}
 		
 					
@@ -126,6 +145,36 @@ public class RmSafeActivity extends Activity {
 			}
 		});  
 		
+		cbGpsStatus.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// 判断当前勾选状态
+				if (cbGpsStatus.isChecked()) {				
+					// 写配置信息到本地
+					mPref.edit().putString("IsUseGps", "true").commit();
+					// 获取系统定位服务
+//					LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
+//					List<String> allProviders = lm.getAllProviders();
+//					System.out.println(allProviders);
+//					
+//					MyLocationListener listener = new MyLocationListener();
+//					lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, listener);
+					
+					// 获取自定义定位服务
+					startService(new Intent(RmSafeActivity.this, LocationService.class));
+					
+					//tvGpsDesc.setText("GPS已绑定");
+					
+				}else {
+					tvGpsDesc.setText("GPS未绑定");
+					// 写配置信息到本地
+					mPref.edit().putString("IsUseGps", "false").commit();
+				}
+			}
+		});		
+		
+		
 	}
 	
 	
@@ -168,4 +217,41 @@ public class RmSafeActivity extends Activity {
 			rawContactCursor.close();
 		}				
 	}
+	
+	class MyLocationListener implements LocationListener {
+
+		@Override
+		public void onLocationChanged(Location location) {
+			// TODO Auto-generated method stub
+			String j = "经度：" + location.getLongitude();
+			String w = "纬度：" + location.getLatitude();
+			String accuracy = "精确度：" + location.getAccuracy();
+			String altitude = "海拔：" + location.getAltitude();
+			
+			System.out.println("GPS : onLocationChanged");
+			//tvGpsDesc.setText(j + w + accuracy + altitude);
+			
+			
+		}
+
+		@Override
+		public void onStatusChanged(String provider, int status, Bundle extras) {
+			// TODO Auto-generated method stub
+			System.out.println("GPS : onStatusChanged");
+		}
+
+		@Override
+		public void onProviderEnabled(String provider) {
+			// TODO Auto-generated method stub
+			System.out.println("GPS : onProviderEnabled");
+		}
+
+		@Override
+		public void onProviderDisabled(String provider) {
+			// TODO Auto-generated method stub
+			System.out.println("GPS : onProviderDisabled");
+		}				
+	}
+	
+	
 }
